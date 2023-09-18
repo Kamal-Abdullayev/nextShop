@@ -1,7 +1,9 @@
+# Environment variables
+
 server.port=0
 
 # Eureka
-spring.application.name=${application.name}
+spring.application.name=auth-service
 eureka.instance.prefer-ip-address=true
 eureka.instance.instance-id=${spring.application.name}:${instanceId:${random.uuid}}
 
@@ -16,6 +18,3 @@ spring.cloud.vault.token=hvs.nVrRBDVjqsvyFL55LcIBgiyb
 spring.cloud.vault.kv.enabled=true
 spring.cloud.vault.kv.default-context=auth
 spring.cloud.vault.kv.backend=nextShop
-
-#management.endpoints.web.exposure.include=*
-

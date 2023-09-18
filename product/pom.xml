@@ -20,6 +20,7 @@
 		<io.minio.minio.version>8.3.7</io.minio.minio.version>
 		<org.springdoc.springdoc-openapi-starter-webmvc-ui.version>2.0.3</org.springdoc.springdoc-openapi-starter-webmvc-ui.version>
 		<spring-cloud.version>2022.0.4</spring-cloud.version>
+		<spring-cloud-starter-vault-config-version>4.0.1</spring-cloud-starter-vault-config-version>
 	</properties>
 
 	<dependencies>
@@ -79,6 +80,13 @@
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+		</dependency>
+
+		<!-- Vault -->
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-vault-config</artifactId>
+			<version>${spring-cloud-starter-vault-config-version}</version>
 		</dependency>
 
 		<dependency>

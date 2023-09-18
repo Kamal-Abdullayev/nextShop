@@ -9,7 +9,7 @@ spring:
     gateway:
       routes:
         - id: auth-service
-          uri: lb://nextShop-auth
+          uri: lb://auth-service
           predicates:
             - Path=/api/v1/auth/**
         - id: product-service
