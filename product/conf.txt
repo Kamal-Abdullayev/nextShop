@@ -16,7 +16,7 @@ spring.cloud.vault.kv.default-context=product
 spring.cloud.vault.kv.backend=nextShop
 
 # Minio
-spring.minio.bucket.name=next-shop.product.image
-spring.minio.access-key=nextShop
-spring.minio.secret-key=nextShop
-spring.minio.url=http://127.0.0.1:9008
+minio.bucket.name=next-shop.product.image
+minio.access-key=nextShop
+minio.secret-key=nextShop
+minio.url=http://127.0.0.1:9008

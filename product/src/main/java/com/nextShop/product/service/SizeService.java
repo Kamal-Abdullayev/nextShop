@@ -1,7 +1,7 @@
 package com.nextShop.product.service;
 
-import com.nextShop.product.dto.size.SizeDtoRequest;
-import com.nextShop.product.dto.size.SizeDtoResponse;
+import com.nextShop.product.dto.sizeDto.SizeDtoRequest;
+import com.nextShop.product.dto.sizeDto.SizeDtoResponse;
 
 import java.util.List;
 

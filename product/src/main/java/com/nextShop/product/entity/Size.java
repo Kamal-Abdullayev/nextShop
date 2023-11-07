@@ -14,7 +14,7 @@ import lombok.*;
 @NoArgsConstructor
 @Builder
 @Entity
-@Table(name = "size")
+@Table(name = "sizeDto")
 public class Size extends BaseEntityAudit {
     private String size;
 

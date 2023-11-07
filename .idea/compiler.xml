@@ -9,13 +9,15 @@
         <outputRelativeToContentRoot value="true" />
         <module name="discoveryService" />
         <module name="apiGateway" />
-        <module name="config-server" />
         <module name="product" />
+        <module name="store" />
         <module name="auth" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="config-server" target="17" />
       <module name="configServer" target="17" />
+      <module name="nextShop-common" target="17" />
       <module name="product (1)" target="17" />
     </bytecodeTargetLevel>
   </component>
@@ -26,8 +28,10 @@
       <module name="config-server" options="-parameters" />
       <module name="configServer" options="-parameters" />
       <module name="discoveryService" options="-parameters" />
+      <module name="nextShop-common" options="-parameters" />
       <module name="product" options="-parameters" />
       <module name="product (1)" options="-parameters" />
+      <module name="store" options="-parameters" />
     </option>
   </component>
 </project>

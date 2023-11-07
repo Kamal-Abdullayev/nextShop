@@ -1,7 +1,7 @@
 package com.nextShop.product.service.impl;
 
-import com.nextShop.product.dto.size.SizeDtoRequest;
-import com.nextShop.product.dto.size.SizeDtoResponse;
+import com.nextShop.product.dto.sizeDto.SizeDtoRequest;
+import com.nextShop.product.dto.sizeDto.SizeDtoResponse;
 import com.nextShop.product.entity.base.BaseEntityAudit;
 import com.nextShop.product.entity.Size;
 import com.nextShop.product.exceprion.CommonErrorCodesException;

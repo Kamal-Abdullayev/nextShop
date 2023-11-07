@@ -9,13 +9,17 @@ spring:
     gateway:
       routes:
         - id: auth-service
-          uri: lb://auth-service
+          uri: lb://nextShop-auth
           predicates:
             - Path=/api/v1/auth/**
         - id: product-service
           uri: lb://nextShop-product
           predicates:
-            - Path=/api/v1/**
+            - Path=/api/v1/product/**
+        - id: store-service
+          uri: lb://nextShop-store
+          predicates:
+            - Path=/api/v1/address/**, /api/v1/store/**, /api/v1/brand/**
       discovery:
         locator:
           enabled: true
@@ -27,8 +31,10 @@ eureka:
       defaultZone: ${EUREKA_URI:http://localhost:8761/eureka}
   instance:
     prefer-ip-address: true
-
-
+    ip-address: 127.0.0.1
+    secure-port: ${server.port}
+    instance-id: ${spring.application.name}/${eureka.instance.ip-address}:${server.port}/${instanceId:${random.uuid}}
+  
 management:
   endpoints:
     web:

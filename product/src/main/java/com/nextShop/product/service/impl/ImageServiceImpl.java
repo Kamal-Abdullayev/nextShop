@@ -30,7 +30,7 @@ public class ImageServiceImpl implements ImageService {
     private final ImageRepository imageRepository;
     private final MinioClient minioClient;
 
-    @Value("${spring.minio.bucket.name}")
+    @Value("${minio.bucket.name}")
     private String bucketName;
 
 

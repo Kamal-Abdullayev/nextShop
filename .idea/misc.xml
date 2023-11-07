@@ -10,11 +10,15 @@
         <option value="$PROJECT_DIR$/nextShop-product/product/pom.xml" />
         <option value="$PROJECT_DIR$/configServer/pom.xml" />
         <option value="$PROJECT_DIR$/config-server/pom.xml" />
+        <option value="$PROJECT_DIR$/nextShop-common/pom.xml" />
+        <option value="$PROJECT_DIR$/store/pom.xml" />
       </list>
     </option>
     <option name="ignoredFiles">
       <set>
+        <option value="$PROJECT_DIR$/config-server/pom.xml" />
         <option value="$PROJECT_DIR$/configServer/pom.xml" />
+        <option value="$PROJECT_DIR$/nextShop-common/pom.xml" />
       </set>
     </option>
   </component>
