@@ -12,6 +12,7 @@ import com.nextShop.store.repository.AddressRepository;
 import com.nextShop.store.service.AddressService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Objects;
@@ -48,11 +49,11 @@ public class AddressServiceImpl implements AddressService {
         }
         return address;
     }
-
+    @Transactional
     @Override
     public AddressResponse saveAddress(AddressRequest addressRequestDto) {
         Address address = new Address(addressRequestDto.getCountry(), addressRequestDto.getCity(),
-                addressRequestDto.getAddress(), addressRequestDto.getZipCode(), new Store());
+                addressRequestDto.getAddress(), addressRequestDto.getZipCode());
         addressRepository.save(address);
         return AddressResponse.from(address);
     }

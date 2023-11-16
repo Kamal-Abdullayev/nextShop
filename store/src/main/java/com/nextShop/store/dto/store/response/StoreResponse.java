@@ -20,8 +20,11 @@ public class StoreResponse {
     private byte score;
     List<AddressResponse> addresses;
 
+    private String id; // temporary
+
     public static StoreResponse from(Store store) {
         return StoreResponse.builder()
+                .id(store.getId())
                 .name(store.getName())
                 .score(store.getScore())
                 .addresses(store.getAddresses()

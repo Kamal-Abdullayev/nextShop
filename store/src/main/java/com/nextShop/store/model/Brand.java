@@ -1,12 +1,7 @@
 package com.nextShop.store.model;
 
 import com.nextShop.store.model.base.BaseEntityAudit;
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Entity;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
+import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.Date;
@@ -21,29 +16,33 @@ import java.util.Set;
 public class Brand extends BaseEntityAudit {
     private String name;
     private String description;
+    @Lob
     private byte[] logo;
     private byte score;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.MERGE)
     private Set<Store> stores;
 
-    public Brand(String name, String description, @NotNull byte[] logo) {
+    public Brand(String name, String description, byte[] logo, Set<Store> stores) {
         this.name = name;
         this.description = description;
         this.logo = logo;
+        this.stores = stores;
     }
 
-    public Brand(String createdBy, String updatedBy, boolean isActive, Date createdAt, Date updatedAt, String name, String description, @NotNull byte[] logo) {
+    public Brand(String createdBy, String updatedBy, boolean isActive, Date createdAt, Date updatedAt, String name, String description, byte[] logo, Set<Store> stores) {
         super(createdBy, updatedBy, isActive, createdAt, updatedAt);
         this.name = name;
         this.description = description;
         this.logo = logo;
+        this.stores = stores;
     }
 
-    public Brand(String id, String createdBy, String updatedBy, boolean isActive, Date createdAt, Date updatedAt, String name, String description, @NotNull byte[] logo) {
+    public Brand(String id, String createdBy, String updatedBy, boolean isActive, Date createdAt, Date updatedAt, String name, String description, byte[] logo, Set<Store> stores) {
         super(id, createdBy, updatedBy, isActive, createdAt, updatedAt);
         this.name = name;
         this.description = description;
         this.logo = logo;
+        this.stores = stores;
     }
 }

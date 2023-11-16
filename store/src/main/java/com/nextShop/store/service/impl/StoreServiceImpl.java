@@ -15,7 +15,10 @@ import com.nextShop.store.service.BrandService;
 import com.nextShop.store.service.StoreService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -25,7 +28,6 @@ import java.util.stream.Collectors;
 public class StoreServiceImpl implements StoreService {
 
     private final StoreRepository storeRepository;
-    private final BrandService brandService;
     private final AddressService addressService;
 
     @Override
@@ -40,6 +42,7 @@ public class StoreServiceImpl implements StoreService {
     @Override
     public StoreResponse getStoreById(String id) {
         Store store = findStore(id);
+        System.out.println(store.getId());
         if (!store.isActive()) {
             throw new ItemNotFoundException("Store");
         }
@@ -49,12 +52,14 @@ public class StoreServiceImpl implements StoreService {
     @Override
     public Store getStoreObjectById(String id) {
         Store store = findStore(id);
+        System.out.println(store.getId());
         if (!store.isActive()) {
             throw new ItemNotFoundException("Store");
         }
         return store;
     }
 
+    @Transactional
     @Override
     public StoreResponse saveStore(StoreRequest storeRequestDto) {
         Address address = addressService.getAddressObjectById(storeRequestDto.getAddressId());

@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.bouncycastle.pqc.crypto.bike.BIKEPrivateKeyParameters;
 
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -16,6 +17,7 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 @Builder
 public class BrandResponse {
+    private String id;
     private String name;
     private String description;
     private byte[] logo;
@@ -23,10 +25,14 @@ public class BrandResponse {
 
     public static BrandResponse from(Brand brand) {
         return BrandResponse.builder()
+                .id(brand.getId())
                 .name(brand.getName())
                 .description(brand.getDescription())
                 .logo(brand.getLogo())
-                .stores(brand.getStores().stream().map(StoreResponse::from).collect(Collectors.toSet()))
+                .stores(brand.getStores()
+                        .stream()
+                        .map(StoreResponse::from)
+                        .collect(Collectors.toSet()))
                 .build();
     }
 }

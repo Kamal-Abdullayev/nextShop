@@ -19,5 +19,7 @@ public class BrandRequest {
     private String description;
     @NotNull
     private byte[] logo;
+    @NotBlank
+    private String storeId;
 
 }

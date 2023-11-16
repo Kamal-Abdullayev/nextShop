@@ -53,6 +53,6 @@ public class BrandController {
 
     @GetMapping("/all/deactivated")
     public ResponseEntity<List<BrandResponse>> getAllDeactivatedBrands() {
-        return new ResponseEntity<>(brandService.getBrandList(), HttpStatus.OK);
+        return new ResponseEntity<>(brandService.getAllDeactivatedBrands(), HttpStatus.OK);
     }
 }

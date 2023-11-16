@@ -16,9 +16,10 @@ public class AddressResponse {
     private String address;
     private String zipCode;
 
-
+    private String id; // temporary
     public static AddressResponse from(Address newAddress) {
         return AddressResponse.builder()
+                .id(newAddress.getId())
                 .country(newAddress.getCountry())
                 .city(newAddress.getCity())
                 .address(newAddress.getAddress())

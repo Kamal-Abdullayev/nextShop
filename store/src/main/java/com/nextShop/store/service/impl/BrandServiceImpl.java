@@ -6,20 +6,24 @@ import com.nextShop.store.exceprion.CommonErrorCodesException;
 import com.nextShop.store.exceprion.ItemCannotBeNullException;
 import com.nextShop.store.exceprion.ItemNotFoundException;
 import com.nextShop.store.model.Brand;
+import com.nextShop.store.model.Store;
 import com.nextShop.store.model.base.BaseEntityAudit;
 import com.nextShop.store.repository.BrandRepository;
 import com.nextShop.store.service.BrandService;
+import com.nextShop.store.service.StoreService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service
 public class BrandServiceImpl implements BrandService {
     private final BrandRepository brandRepository;
+    private final StoreService storeService;
 
     @Override
     public List<BrandResponse> getBrandList() {
@@ -50,7 +54,8 @@ public class BrandServiceImpl implements BrandService {
 
     @Override
     public BrandResponse saveBrand(BrandRequest brandRequestDto) {
-        Brand brand = new Brand(brandRequestDto.getName(), brandRequestDto.getDescription(), brandRequestDto.getLogo());
+        Store store = storeService.getStoreObjectById(brandRequestDto.getStoreId());
+        Brand brand = new Brand(brandRequestDto.getName(), brandRequestDto.getDescription(), brandRequestDto.getLogo(), Set.of(store));
         brandRepository.save(brand);
         return BrandResponse.from(brand);
     }

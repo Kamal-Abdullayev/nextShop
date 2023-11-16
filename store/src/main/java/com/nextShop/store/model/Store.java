@@ -17,16 +17,13 @@ import java.util.UUID;
 @Builder
 @Data
 @Entity
+@Table(name = "store")
 public class Store extends BaseEntityAudit {
     private String name;
     private byte score;
 
-    @OneToMany(mappedBy = "store",  cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
     private List<Address> addresses;
-
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="brand_id")
-    private Brand brand;
 
     public Store(String name, List<Address> addresses) {
         this.name = name;
