@@ -11,12 +11,10 @@ import lombok.*;
 @Builder
 public class ColorRequest {
     private String color;
-    private Product product;
 
     public static ColorResponse from(Color color) {
         return ColorResponse.builder()
                 .color(color.getColor())
-                .product(color.getProduct())
                 .build();
     }
 }

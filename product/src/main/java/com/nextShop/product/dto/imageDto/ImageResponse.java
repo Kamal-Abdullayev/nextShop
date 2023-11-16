@@ -14,14 +14,12 @@ public class ImageResponse {
     private String id;
     private String imagePath;
     private boolean isMainImage;
-    private Product product;
 
     public static ImageResponse from(Image image) {
         return ImageResponse.builder()
                 .id(image.getId())
                 .imagePath("http://127.0.0.1:9008/next-shop.product.image/" + image.getImagePath()) // Temporary
                 .isMainImage(image.isMainImage())
-                .product(image.getProduct())
                 .build();
     }
 }

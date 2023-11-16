@@ -12,12 +12,10 @@ import lombok.*;
 @Builder
 public class SizeDtoRequest {
     private String size;
-    private Product product;
 
     public static SizeDtoRequest from(Size size) {
         return SizeDtoRequest.builder()
                 .size(size.getSize())
-                .product(size.getProduct())
                 .build();
     }
 }

@@ -1,7 +1,5 @@
 package com.nextShop.product.service.impl;
 
-import com.nextShop.product.dto.colorDto.ColorResponse;
-import com.nextShop.product.dto.converter.ColorDtoConverter;
 import com.nextShop.product.dto.productDto.ProductResponse;
 import com.nextShop.product.dto.productDto.ProductSaveRequest;
 import com.nextShop.product.entity.*;

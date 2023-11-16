@@ -58,8 +58,7 @@ public class ImageServiceImpl implements ImageService {
         String imagePath = "storeName" + "/" + "userId_userName" + "/" + "userid" + "storeId" + System.currentTimeMillis() + ".png";
         Image image = new Image(
                 imagePath,
-                imageRequest.isMainImage(),
-                imageRequest.getProduct()
+                imageRequest.isMainImage()
         );
         imageRepository.save(image);
         saveImageToMinio(image.getImagePath(), imageRequest.getImageContent());

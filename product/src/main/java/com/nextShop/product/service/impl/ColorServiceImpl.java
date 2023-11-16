@@ -44,7 +44,7 @@ public class ColorServiceImpl implements ColorService {
         if (colorDtoRequest.getColor() == null) {
             throw new ItemCannotBeNullException("Color");
         }
-        Color color = new Color(colorDtoRequest.getColor(), colorDtoRequest.getProduct());
+        Color color = new Color(colorDtoRequest.getColor());
         colorRepository.save(color);
         return color.getId();
     }
@@ -60,9 +60,7 @@ public class ColorServiceImpl implements ColorService {
         } else {
             throw new ItemCannotBeNullException("Color field");
         }
-        if (Objects.nonNull(colorDtoRequest.getProduct())) {
-            dbColor.setProduct(colorDtoRequest.getProduct());
-        }
+        colorRepository.save(dbColor);
         return ColorResponse.from(dbColor);
     }
 

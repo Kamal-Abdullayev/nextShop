@@ -14,12 +14,8 @@ import lombok.*;
 @NoArgsConstructor
 @Builder
 @Entity
-@Table(name = "sizeDto")
+@Table(name = "size")
 public class Size extends BaseEntityAudit {
     private String size;
-
-    @JsonIgnore
-    @ManyToOne
-    private Product product;
 
 }

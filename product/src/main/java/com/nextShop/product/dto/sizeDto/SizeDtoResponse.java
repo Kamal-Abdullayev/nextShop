@@ -17,7 +17,6 @@ public class SizeDtoResponse {
         return SizeDtoResponse.builder()
                 .id(size.getId())
                 .size(size.getSize())
-                .product(size.getProduct())
                 .build();
     }
 }

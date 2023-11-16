@@ -13,11 +13,8 @@ import lombok.*;
 @NoArgsConstructor
 @Entity
 public class Image extends BaseEntityAudit {
-
     private String imagePath;
     @Column(name = "is_main")
     private boolean isMainImage;
-    @ManyToOne
-    private Product product;
 
 }

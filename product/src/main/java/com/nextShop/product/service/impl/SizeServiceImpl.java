@@ -44,7 +44,7 @@ public class SizeServiceImpl implements SizeService {
         if (sizeDtoRequest.getSize() == null) {
             throw new ItemCannotBeNullException("Size");
         }
-        Size size = new Size(sizeDtoRequest.getSize(), sizeDtoRequest.getProduct());
+        Size size = new Size(sizeDtoRequest.getSize());
         sizeRepository.save(size);
         return size.getId();
     }
@@ -60,9 +60,7 @@ public class SizeServiceImpl implements SizeService {
         } else {
             throw new ItemNotFoundException("Size field");
         }
-        if (Objects.nonNull(sizeDtoRequest.getSize())) {
-            dbSize.setProduct(sizeDtoRequest.getProduct());
-        }
+        sizeRepository.save(dbSize);
         return SizeDtoResponse.from(dbSize);
     }
 

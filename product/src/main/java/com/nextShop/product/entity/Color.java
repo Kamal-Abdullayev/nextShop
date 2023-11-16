@@ -14,7 +14,5 @@ import lombok.*;
 @Entity
 public class Color extends BaseEntityAudit {
     private String color;
-    @ManyToOne
-    private Product product;
 
 }
