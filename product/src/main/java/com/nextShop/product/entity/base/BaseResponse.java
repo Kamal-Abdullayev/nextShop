@@ -20,4 +20,5 @@ public class BaseResponse<T> {
                 .data(data)
                 .build();
     }
+
 }

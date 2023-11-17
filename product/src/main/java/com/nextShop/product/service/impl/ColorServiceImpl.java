@@ -40,6 +40,15 @@ public class ColorServiceImpl implements ColorService {
     }
 
     @Override
+    public Color getColorObject(String id) {
+        Color color = findColor(id);
+        if (!color.isActive()) {
+            throw new ItemNotFoundException("Color");
+        }
+        return color;
+    }
+
+    @Override
     public String saveColor(ColorRequest colorDtoRequest) {
         if (colorDtoRequest.getColor() == null) {
             throw new ItemCannotBeNullException("Color");

@@ -50,6 +50,13 @@ public class ImageServiceImpl implements ImageService {
         return ImageResponse.from(image);
     }
 
+    @Override
+    public Image getImageObject(String id) {
+        Image image = findImage(id);
+        if (!image.isActive()) throw new ItemNotFoundException("Image");
+        return image;
+    }
+
     @Transactional
     @Override
     public String saveImage(ImageRequest imageRequest) {

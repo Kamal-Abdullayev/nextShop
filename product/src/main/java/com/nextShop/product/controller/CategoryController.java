@@ -8,7 +8,6 @@ import com.nextShop.product.service.CategoryService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -25,48 +24,48 @@ public class CategoryController {
     }
 
     @GetMapping("/{id}/categories")
-    public ResponseEntity<List<ChildCategoryResponse>> getChildCategories(@PathVariable("id") String id) {
-        return new ResponseEntity<>(categoryService.getChildCategories(id), HttpStatus.OK);
+    public BaseResponse<List<ChildCategoryResponse>> getChildCategories(@PathVariable("id") String id) {
+        return BaseResponse.success(categoryService.getChildCategories(id));
     }
 
     @GetMapping("/{id}/products")
-    public ResponseEntity<List<CategoryProductResponse>> getCategoryProducts(@PathVariable("id") String id) {
-        return new ResponseEntity<>(categoryService.getCategoryProducts(id), HttpStatus.OK);
+    public BaseResponse<List<CategoryProductResponse>> getCategoryProducts(@PathVariable("id") String id) {
+        return BaseResponse.success(categoryService.getCategoryProducts(id));
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<CategoryResponse> findCategoryById(@PathVariable("id") String id) {
-        return new ResponseEntity<>(categoryService.getCategoryById(id), HttpStatus.CREATED);
+    public BaseResponse<CategoryResponse> findCategoryById(@PathVariable("id") String id) {
+        return BaseResponse.success(categoryService.getCategoryById(id));
     }
 
     @PostMapping
-    public ResponseEntity<String> saveCategory(@Valid @RequestBody CategoryRequest categoryRequest) {
-        return new ResponseEntity<>(categoryService.saveCategory(categoryRequest), HttpStatus.CREATED);
+    public BaseResponse<String> saveCategory(@Valid @RequestBody CategoryRequest categoryRequest) {
+        return new BaseResponse<>(HttpStatus.CREATED, null, categoryService.saveCategory(categoryRequest));
     }
 
     // Change it
     @PutMapping("{id}")
-    public ResponseEntity<CategoryUpdateResponse> updateCategory(@PathVariable("id") String id,
+    public BaseResponse<CategoryUpdateResponse> updateCategory(@PathVariable("id") String id,
                                                                  @Valid @RequestBody CategoryUpdateRequest categoryUpdateRequest) {
-        return new ResponseEntity<>(categoryService.updateCategory(id, categoryUpdateRequest), HttpStatus.OK);
+        return new BaseResponse<>(HttpStatus.OK, null, categoryService.updateCategory(id, categoryUpdateRequest));
     }
 
     @PatchMapping("/deactivate/{id}")
-    public ResponseEntity<HttpStatus> deactivateCategory(@PathVariable("id") String id) {
+    public BaseResponse<HttpStatus> deactivateCategory(@PathVariable("id") String id) {
         categoryService.deactivateCategory(id);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        return new BaseResponse<>(HttpStatus.NO_CONTENT, null, null);
     }
 
     @PatchMapping("/activate/{id}")
-    public ResponseEntity<HttpStatus> activateCategory(@PathVariable("id") String id) {
+    public BaseResponse<HttpStatus> activateCategory(@PathVariable("id") String id) {
         categoryService.activateCategory(id);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        return new BaseResponse<>(HttpStatus.NO_CONTENT, null, null);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<HttpStatus> deleteCategory(@PathVariable("id") String id) {
+    public BaseResponse<HttpStatus> deleteCategory(@PathVariable("id") String id) {
         categoryService.deleteCategory(id);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        return new BaseResponse<>(HttpStatus.NO_CONTENT, null, null);
     }
 
     @GetMapping("/all/deactivated")

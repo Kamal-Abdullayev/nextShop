@@ -26,7 +26,7 @@ public class Category extends BaseEntityAudit {
     private Category parentCategory;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "parentCategory", cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "parentCategory", cascade = CascadeType.MERGE, orphanRemoval = true)
     private List<Category> categoryChildrensList = new LinkedList<>();
 
     @JsonIgnore

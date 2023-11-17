@@ -23,9 +23,6 @@ public class StoreApplication implements CommandLineRunner {
 	private final AddressRepository addressRepository;
 	private final BrandRepository brandRepository;
 
-	private final AddressService addressService;
-	private final StoreService storeService;
-
 	public static void main(String[] args) {
 		SpringApplication.run(StoreApplication.class, args);
 	}
@@ -40,26 +37,20 @@ public class StoreApplication implements CommandLineRunner {
 		addressRepository.save(address2);
 
 
-		Address dbAddress = addressService.getAddressObjectById(address.getId());
-		Address dbAddress2 = addressService.getAddressObjectById(address2.getId());
-		Store store = new Store("nextShop - Azerbaijan", List.of(dbAddress));
-		Store store2 = new Store("nextShop - Czech Republic", List.of(dbAddress2));
+		Store store = new Store("nextShop - Azerbaijan", List.of(address));
+		Store store2 = new Store("nextShop - Czech Republic", List.of(address2));
 		store.setActive(true);
 		store2.setActive(true);
 		storeRepository.save(store);
 		storeRepository.save(store2);
 
 
-		Store dbStore = storeService.getStoreObjectById(store.getId());
-		Store dbStore2 = storeService.getStoreObjectById(store2.getId());
-		Brand brand = new Brand("nextShop", DESCRIPTION, LOGO.getBytes(), Set.of(dbStore));
-		Brand brand2 = new Brand("nextShopOriginal", DESCRIPTION, LOGO.getBytes(), Set.of(dbStore2));
+		Brand brand = new Brand("nextShop", DESCRIPTION, LOGO.getBytes(), Set.of(store));
+		Brand brand2 = new Brand("nextShopOriginal", DESCRIPTION, LOGO.getBytes(), Set.of(store2));
 		brand.setActive(true);
 		brand2.setActive(true);
 		brandRepository.save(brand);
 		brandRepository.save(brand2);
-
-
 	}
 
 

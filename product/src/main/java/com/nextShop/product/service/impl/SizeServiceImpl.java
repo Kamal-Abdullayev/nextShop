@@ -40,6 +40,15 @@ public class SizeServiceImpl implements SizeService {
     }
 
     @Override
+    public Size findSizeObject(String id) {
+        Size size = findSize(id);
+        if (!size.isActive()) {
+            throw new ItemNotFoundException("Size");
+        }
+        return size;
+    }
+
+    @Override
     public String saveSize(SizeDtoRequest sizeDtoRequest) {
         if (sizeDtoRequest.getSize() == null) {
             throw new ItemCannotBeNullException("Size");

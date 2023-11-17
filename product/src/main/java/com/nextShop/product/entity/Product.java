@@ -4,6 +4,7 @@ import com.nextShop.product.entity.base.BaseEntityAudit;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.Date;
 import java.util.List;
 
 @Builder
@@ -22,15 +23,48 @@ public class Product extends BaseEntityAudit {
     private byte rate;
 
     // Relations
-    @OneToMany
+    @OneToMany(cascade = CascadeType.MERGE)
     private List<Size> sizeList;
-    @OneToMany
+    @OneToMany(cascade = CascadeType.MERGE)
     private List<Image> imageList;
     @ManyToMany
     private List<Category> categoryList;
-    @OneToMany
+    @OneToMany(cascade = CascadeType.MERGE)
     private List<Color> colorList;
 
-    // Store
 
+    public Product(String name, double price, double discountPrice, String description, List<Size> sizeList, List<Image> imageList, List<Category> categoryList, List<Color> colorList) {
+        this.name = name;
+        this.price = price;
+        this.discountPrice = discountPrice;
+        this.description = description;
+        this.sizeList = sizeList;
+        this.imageList = imageList;
+        this.categoryList = categoryList;
+        this.colorList = colorList;
+    }
+
+    public Product(String createdBy, String updatedBy, boolean isActive, Date createdAt, Date updatedAt, String name, double price, double discountPrice, String description, List<Size> sizeList, List<Image> imageList, List<Category> categoryList, List<Color> colorList) {
+        super(createdBy, updatedBy, isActive, createdAt, updatedAt);
+        this.name = name;
+        this.price = price;
+        this.discountPrice = discountPrice;
+        this.description = description;
+        this.sizeList = sizeList;
+        this.imageList = imageList;
+        this.categoryList = categoryList;
+        this.colorList = colorList;
+    }
+
+    public Product(String id, String createdBy, String updatedBy, boolean isActive, Date createdAt, Date updatedAt, String name, double price, double discountPrice, String description, List<Size> sizeList, List<Image> imageList, List<Category> categoryList, List<Color> colorList) {
+        super(id, createdBy, updatedBy, isActive, createdAt, updatedAt);
+        this.name = name;
+        this.price = price;
+        this.discountPrice = discountPrice;
+        this.description = description;
+        this.sizeList = sizeList;
+        this.imageList = imageList;
+        this.categoryList = categoryList;
+        this.colorList = colorList;
+    }
 }

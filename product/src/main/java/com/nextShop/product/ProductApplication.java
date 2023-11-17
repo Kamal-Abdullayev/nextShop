@@ -1,12 +1,10 @@
 package com.nextShop.product;
 
-import com.nextShop.product.entity.Category;
-import com.nextShop.product.entity.Color;
-import com.nextShop.product.entity.Size;
-import com.nextShop.product.repository.CategoryRepository;
-import com.nextShop.product.repository.ColorRepository;
-import com.nextShop.product.repository.SizeRepository;
-import lombok.AllArgsConstructor;
+import com.nextShop.product.entity.*;
+import com.nextShop.product.repository.*;
+import com.nextShop.product.service.ColorService;
+import com.nextShop.product.service.ImageService;
+import com.nextShop.product.service.SizeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -22,6 +20,9 @@ public class ProductApplication implements CommandLineRunner {
 	private final CategoryRepository categoryRepository;
 	private final ColorRepository colorRepository;
 	private final SizeRepository sizeRepository;
+	private final ImageRepository imageRepository;
+	private final ProductRepository productRepository;
+
 	public static void main(String[] args) {
 		SpringApplication.run(ProductApplication.class, args);
 	}
@@ -38,7 +39,9 @@ public class ProductApplication implements CommandLineRunner {
 		List<Category> categoryList2 = new LinkedList<>();
 		categoryList.add(category3);
 		category2.setCategoryChildrensList(categoryList2);
-
+		category1.setActive(true);
+		category2.setActive(true);
+		category3.setActive(true);
 		categoryRepository.save(category1);
 		categoryRepository.save(category2);
 		categoryRepository.save(category3);
@@ -63,5 +66,25 @@ public class ProductApplication implements CommandLineRunner {
 		sizeRepository.save(size);
 		sizeRepository.save(size2);
 		sizeRepository.save(size3);
+
+
+		Image image = new Image(imagePath, true);
+		Image image2 = new Image(imagePath, true);
+		image.setActive(true);
+		image2.setActive(true);
+		imageRepository.save(image);
+		imageRepository.save(image2);
+
+
+		Product product = new Product("Product 1", 10, 8, "Lorem ipsum", List.of(size), List.of(image), null, List.of(color));
+		Product product2 = new Product("Product 2", 20, 19.99, "Lorem ", List.of(size2), List.of(image2), null, List.of(color2));
+		product.setActive(true);
+		product2.setActive(true);
+		productRepository.save(product);
+		productRepository.save(product2);
+
 	}
+
+
+	private static final String imagePath = "storeName" + "/" + "userId_userName" + "/" + "userid" + "storeId" + System.currentTimeMillis() + ".png";
 }
