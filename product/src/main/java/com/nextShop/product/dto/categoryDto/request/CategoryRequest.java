@@ -14,8 +14,6 @@ import java.util.List;
 public class CategoryRequest {
     private String categoryName;
     private String parentCategoryId;
-    private List<String> categoryChildrensIdList;
-    private List<Product> productList;
 
 }
 

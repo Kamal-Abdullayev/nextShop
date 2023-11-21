@@ -1,4 +1,4 @@
-package com.nextShop.auth.configs;
+package com.nextShop.auth.config;
 
 import io.swagger.v3.oas.annotations.enums.SecuritySchemeIn;
 import io.swagger.v3.oas.annotations.enums.SecuritySchemeType;

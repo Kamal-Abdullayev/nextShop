@@ -20,6 +20,7 @@ public class ProductSaveRequest {
     private String imageId;
     private String colorId;
     private String sizeId;
+    private List<String> categoryIdList;
 
     public static ProductSaveRequest from(Product product) {
         return ProductSaveRequest.builder()

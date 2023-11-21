@@ -8,12 +8,6 @@ spring:
       enabled: true
   datasource:
     url: "jdbc:h2:mem:nextShop"
-
-
-security:
-  jwt:
-    public-key: MdnasjdnjNNjknkjdsnjknkju31983u21
-    private-key: MdnasjdnjNNjknkjdsnjknkju31983u21
-    access-token-vaildity-time: 1800000
-    refresh-token-calidity-time: 86400000
-
+  jpa:
+    hibernate:
+      ddl-auto: update

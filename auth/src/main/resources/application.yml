@@ -2,7 +2,7 @@ spring:
   application:
     name: nextShop-auth
   profiles:
-    active: prod
+    active: local
   liquibase:
     enabled: true
     change-log: classpath:migrations/changelog-master.xml

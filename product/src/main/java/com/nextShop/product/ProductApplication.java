@@ -76,8 +76,8 @@ public class ProductApplication implements CommandLineRunner {
 		imageRepository.save(image2);
 
 
-		Product product = new Product("Product 1", 10, 8, "Lorem ipsum", List.of(size), List.of(image), null, List.of(color));
-		Product product2 = new Product("Product 2", 20, 19.99, "Lorem ", List.of(size2), List.of(image2), null, List.of(color2));
+		Product product = new Product("Product 1", 10, 8, "Lorem ipsum", List.of(size), List.of(image), List.of(category1, category2, category3), List.of(color));
+		Product product2 = new Product("Product 2", 20, 19.99, "Lorem ", List.of(size2), List.of(image2), List.of(category2), List.of(color2));
 		product.setActive(true);
 		product2.setActive(true);
 		productRepository.save(product);

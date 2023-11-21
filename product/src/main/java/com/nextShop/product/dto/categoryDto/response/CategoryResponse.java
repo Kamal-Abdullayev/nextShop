@@ -1,9 +1,11 @@
 package com.nextShop.product.dto.categoryDto.response;
 
+import com.nextShop.product.dto.productDto.ProductResponse;
 import com.nextShop.product.entity.Category;
 import com.nextShop.product.entity.Product;
 import lombok.*;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -18,7 +20,7 @@ public class CategoryResponse {
     private String categoryName;
     private ParentCategoryResponse parentCategory;
     private List<ParentCategoryResponse> categoryChildrensList;
-    private List<Product> productList;
+    private List<ProductResponse> productList;
 
     public static CategoryResponse from(Category category) {
         ParentCategoryResponse parentCategoryResponse = null;
@@ -29,12 +31,15 @@ public class CategoryResponse {
         if (category.getCategoryChildrensList() != null) {
             categoryChildrensList = category.getCategoryChildrensList().stream().map(ParentCategoryResponse::from).collect(Collectors.toList());
         }
+
         return CategoryResponse.builder()
                 .id(category.getId())
                 .categoryName(category.getCategoryName())
                 .parentCategory(parentCategoryResponse)
                 .categoryChildrensList(categoryChildrensList)
-                .productList(category.getProductList())
+                .productList(category.getProductList().stream()
+                        .map(ProductResponse::from)
+                        .collect(Collectors.toList()))
                 .build();
     }
 

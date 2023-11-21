@@ -21,6 +21,8 @@ import java.util.UUID;
 public class Store extends BaseEntityAudit {
     private String name;
     private byte score;
+    @ElementCollection
+    List<String> productId;
 
     @OneToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
     private List<Address> addresses;

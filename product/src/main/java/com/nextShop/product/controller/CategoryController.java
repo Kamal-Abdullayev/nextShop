@@ -4,6 +4,7 @@ import com.nextShop.product.dto.categoryDto.request.CategoryRequest;
 import com.nextShop.product.dto.categoryDto.request.CategoryUpdateRequest;
 import com.nextShop.product.dto.categoryDto.response.*;
 import com.nextShop.product.entity.base.BaseResponse;
+import com.nextShop.product.repository.CategoryRepository;
 import com.nextShop.product.service.CategoryService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -17,6 +18,7 @@ import java.util.List;
 @RequestMapping("/api/v1/category")
 public class CategoryController {
     private final CategoryService categoryService;
+    private final CategoryRepository categoryRepository;
 
     @GetMapping("/all")
     public BaseResponse<List<CategoryResponse>> findAllCategories() {
@@ -39,8 +41,9 @@ public class CategoryController {
     }
 
     @PostMapping
-    public BaseResponse<String> saveCategory(@Valid @RequestBody CategoryRequest categoryRequest) {
-        return new BaseResponse<>(HttpStatus.CREATED, null, categoryService.saveCategory(categoryRequest));
+    public BaseResponse<HttpStatus> saveCategory(@Valid @RequestBody CategoryRequest categoryRequest) {
+        categoryService.saveCategory(categoryRequest);
+        return new BaseResponse<>(HttpStatus.CREATED, null, null);
     }
 
     // Change it
@@ -71,5 +74,10 @@ public class CategoryController {
     @GetMapping("/all/deactivated")
     public BaseResponse<List<ParentCategoryResponse>> getAllDeactivatedCategories() {
         return BaseResponse.success(categoryService.getAllDeactivatedCategories());
+    }
+
+    @GetMapping("/test")
+    public BaseResponse<List<String>> test(@RequestBody List<String> idList) {
+        return BaseResponse.success(categoryRepository.getInvalidCategoriesIdList(idList));
     }
 }

@@ -3,17 +3,20 @@ package com.nextShop.product.service.impl;
 import com.nextShop.product.dto.categoryDto.request.CategoryRequest;
 import com.nextShop.product.dto.categoryDto.request.CategoryUpdateRequest;
 import com.nextShop.product.dto.categoryDto.response.*;
+import com.nextShop.product.entity.Product;
 import com.nextShop.product.entity.base.BaseEntityAudit;
 import com.nextShop.product.entity.Category;
 import com.nextShop.product.exceprion.CommonErrorCodesException;
 import com.nextShop.product.exceprion.ItemCannotBeNullException;
 import com.nextShop.product.exceprion.ItemNotFoundException;
 import com.nextShop.product.repository.CategoryRepository;
+import com.nextShop.product.repository.ProductRepository;
 import com.nextShop.product.service.CategoryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -22,6 +25,7 @@ import java.util.stream.Collectors;
 @Service
 public class CategoryServiceImpl implements CategoryService {
     private final CategoryRepository categoryRepository;
+    private final ProductRepository productRepository;
 
     @Override
     public List<CategoryResponse> getAllCategories() {
@@ -60,14 +64,27 @@ public class CategoryServiceImpl implements CategoryService {
         return CategoryResponse.from(findCategory(id));
     }
 
+    @Override
+    public Category getCategoryObjectById(String id) {
+        Category category = findCategory(id);
+        if (!category.isActive()) {
+            throw new ItemNotFoundException("Category");
+        }
+        return category;
+    }
+
+    @Override
+    public List<String> getInvalidCategoryIdList(List<String> categoryIdList) {
+        return categoryRepository.getInvalidCategoriesIdList(categoryIdList);
+    }
+
     @Transactional
     @Override
-    public String saveCategory(CategoryRequest categoryRequest) {
+    public void saveCategory(CategoryRequest categoryRequest) {
         Category category = new Category(
                 categoryRequest.getCategoryName(),
                 null,
-                null,
-                categoryRequest.getProductList());
+                null);
 
         if (categoryRequest.getParentCategoryId() != null) {
             List<Category> parentCategorysChildrenList = new LinkedList<>();
@@ -81,7 +98,6 @@ public class CategoryServiceImpl implements CategoryService {
         }
 
         categoryRepository.save(category);
-        return category.getId();
     }
 
     @Transactional
@@ -158,4 +174,8 @@ public class CategoryServiceImpl implements CategoryService {
     private Category findCategory(String id) {
         return categoryRepository.findById(id).orElseThrow(() -> new ItemNotFoundException("Category"));
     }
+    private Product findProduct(String id) {
+        return productRepository.findById(id).orElseThrow(() -> new ItemNotFoundException("Product"));
+    }
+
 }

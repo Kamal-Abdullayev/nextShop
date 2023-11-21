@@ -1,40 +1,39 @@
 package com.nextShop.auth.models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import jakarta.persistence.*;
+import lombok.*;
+import org.springframework.security.core.userdetails.UserDetails;
 
-@Getter
-@Setter
+import java.util.Set;
+
+@Data
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-public class Users {
+@Builder
+public class Users implements UserDetails {
+
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private String id;
     private String name;
     private String surname;
     private String username;
-    private String status;
-    private Long roleId;
     private String email;
     private String password;
     private String phoneNumber;
 
-    public Users(String name, String surname, String username, String status, Long roleId, String email, String password, String phoneNumber) {
-        this.name = name;
-        this.surname = surname;
-        this.username = username;
-        this.status = status;
-        this.roleId = roleId;
-        this.email = email;
-        this.password = password;
-        this.phoneNumber = phoneNumber;
-    }
+    private boolean accountNonExpired;
+    private boolean isEnabled;
+    private boolean accountNonLocked;
+    private boolean credentialsNonExpired;
+
+    @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
+    @JoinTable(name = "authorities", joinColumns = @JoinColumn(name = "user_id"))
+    @Column(name = "role", nullable = false)
+    @Enumerated(EnumType.STRING)
+    private Set<Role> authorities;
+
+
+
 }

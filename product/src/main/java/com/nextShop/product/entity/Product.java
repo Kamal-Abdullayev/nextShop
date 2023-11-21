@@ -28,6 +28,10 @@ public class Product extends BaseEntityAudit {
     @OneToMany(cascade = CascadeType.MERGE)
     private List<Image> imageList;
     @ManyToMany
+    @JoinTable(
+            name = "product_categories",
+            joinColumns = @JoinColumn(name = "product_id"),
+            inverseJoinColumns = @JoinColumn(name = "category_id"))
     private List<Category> categoryList;
     @OneToMany(cascade = CascadeType.MERGE)
     private List<Color> colorList;
@@ -66,5 +70,20 @@ public class Product extends BaseEntityAudit {
         this.imageList = imageList;
         this.categoryList = categoryList;
         this.colorList = colorList;
+    }
+
+    @Override
+    public String toString() {
+        return "Product{" +
+                "name='" + name + '\'' +
+                ", price=" + price +
+                ", discountPrice=" + discountPrice +
+                ", description='" + description + '\'' +
+                ", rate=" + rate +
+                ", sizeList=" + sizeList +
+                ", imageList=" + imageList +
+                ", categoryList=" + categoryList +
+                ", colorList=" + colorList +
+                '}';
     }
 }

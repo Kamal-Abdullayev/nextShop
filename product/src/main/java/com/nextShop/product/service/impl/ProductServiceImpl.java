@@ -1,5 +1,6 @@
 package com.nextShop.product.service.impl;
 
+import com.nextShop.product.dto.categoryDto.response.CategoryResponse;
 import com.nextShop.product.dto.productDto.ProductResponse;
 import com.nextShop.product.dto.productDto.ProductSaveRequest;
 import com.nextShop.product.dto.productDto.ProductUpdateRequest;
@@ -7,10 +8,7 @@ import com.nextShop.product.entity.*;
 import com.nextShop.product.exceprion.CommonErrorCodesException;
 import com.nextShop.product.exceprion.ItemNotFoundException;
 import com.nextShop.product.repository.ProductRepository;
-import com.nextShop.product.service.ColorService;
-import com.nextShop.product.service.ImageService;
-import com.nextShop.product.service.ProductService;
-import com.nextShop.product.service.SizeService;
+import com.nextShop.product.service.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -27,6 +25,7 @@ public class ProductServiceImpl implements ProductService {
     private final ColorService colorService;
     private final SizeService sizeService;
     private final ImageService imageService;
+    private final CategoryService categoryService;
 
     @Override
     public List<ProductResponse> getProductList() {
@@ -40,18 +39,31 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    public Product getProductObjectById(String id) {
+        Product dbProduct = findProduct(id);
+        if (!dbProduct.isActive()) throw new ItemNotFoundException("Product");
+        return dbProduct;
+    }
+
+    @Override
     public void saveProduct(ProductSaveRequest productSaveRequest) {
         Size size = sizeService.findSizeObject(productSaveRequest.getSizeId());
         Image image = imageService.getImageObject(productSaveRequest.getImageId());
         Color color = colorService.getColorObject(productSaveRequest.getColorId());
+        List<Category> categoryList = new ArrayList<>();
+
+        productSaveRequest.getCategoryIdList().forEach(categoryId -> {
+            Category dbCategory = categoryService.getCategoryObjectById(categoryId);
+            categoryList.add(dbCategory);
+        });
         Product product = new Product(
                 productSaveRequest.getName(),
                 productSaveRequest.getPrice(),
-                0.00,
+                productSaveRequest.getDiscountPrice(),
                 productSaveRequest.getDescription(),
                 List.of(size),
                 List.of(image),
-                new ArrayList<>(),
+                categoryList,
                 List.of(color)
         );
         productRepository.save(product);
