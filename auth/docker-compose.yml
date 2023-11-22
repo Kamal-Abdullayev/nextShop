@@ -1,0 +1,18 @@
+version: '3.3'
+services:
+  db:
+    image: mysql:5.7
+    restart: always
+    environment:
+      MYSQL_DATABASE: 'nextShop-auth'
+      MYSQL_USER: 'nextShop_user'
+      MYSQL_PASSWORD: 'password'
+      MYSQL_ROOT_PASSWORD: 'password'
+    ports:
+      - '3310:3306'
+    expose:
+      - '3310'
+    volumes:
+      - my-db:/var/lib/mysql
+volumes:
+  my-db:

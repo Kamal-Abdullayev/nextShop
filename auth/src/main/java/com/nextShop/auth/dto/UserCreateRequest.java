@@ -1,17 +1,16 @@
 package com.nextShop.auth.dto;
 
-import com.nextShop.auth.models.Role;
+import com.nextShop.auth.model.Role;
 
 import java.util.Set;
 
-public record CreateUserRequest(
+public record UserCreateRequest(
         String name,
         String surname,
         String username,
         String email,
-        String password,
         String phoneNumber,
+        String password,
         Set<Role> authorities
 ) {
-
 }
