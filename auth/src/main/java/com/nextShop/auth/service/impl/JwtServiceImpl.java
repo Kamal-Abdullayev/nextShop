@@ -5,31 +5,30 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
-import lombok.Data;
-import lombok.Value;
-import org.apache.commons.collections4.map.HashedMap;
-import org.aspectj.weaver.SignatureUtils;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import java.security.Key;
-import java.util.Base64;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Map;
 
 @Service
 public class JwtServiceImpl {
 
-    @Value("${jwt.key}")
-    private String SECRET;
+    @Value("${nextShop.jwt.key}")
+    private String secret;
 
     public String generateToken(String userName) {
-        Map<String, Object> claims = new HashedMap<>();
+        Map<String, Object> claims = new HashMap<>();
         claims.put("test", "test message");
         return createToken(claims, userName);
     }
     public boolean validateToken(String token, UserDetails userDetails) {
-
+        String userName = extractUser(token);
+        Date expirationDate = extractExpiration(token);
+        return userDetails.getUsername().equals(userName) && !expirationDate.after(new Date());
     }
 
     private Date extractExpiration(String token) {
@@ -60,7 +59,7 @@ public class JwtServiceImpl {
     }
 
     private Key getSignKey() {
-        byte[] keyBytes = Decoders.BASE64.decode(SECRET);
+        byte[] keyBytes = Decoders.BASE64.decode(secret);
         return Keys.hmacShaKeyFor(keyBytes);
     }
 

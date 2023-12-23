@@ -4,11 +4,13 @@ import com.nextShop.product.dto.categoryDto.request.CategoryRequest;
 import com.nextShop.product.dto.categoryDto.request.CategoryUpdateRequest;
 import com.nextShop.product.dto.categoryDto.response.*;
 import com.nextShop.product.entity.base.BaseResponse;
+import com.nextShop.product.exceprion.BaseException;
 import com.nextShop.product.repository.CategoryRepository;
 import com.nextShop.product.service.CategoryService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -22,7 +24,8 @@ public class CategoryController {
 
     @GetMapping("/all")
     public BaseResponse<List<CategoryResponse>> findAllCategories() {
-        return BaseResponse.success(categoryService.getAllCategories());
+        throw BaseException.unexpected();
+//        return BaseResponse.success(categoryService.getAllCategories());
     }
 
     @GetMapping("/{id}/categories")
@@ -41,34 +44,34 @@ public class CategoryController {
     }
 
     @PostMapping
-    public BaseResponse<HttpStatus> saveCategory(@Valid @RequestBody CategoryRequest categoryRequest) {
+    public ResponseEntity<HttpStatus> saveCategory(@Valid @RequestBody CategoryRequest categoryRequest) {
         categoryService.saveCategory(categoryRequest);
-        return new BaseResponse<>(HttpStatus.CREATED, null, null);
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     // Change it
     @PutMapping("{id}")
-    public BaseResponse<CategoryUpdateResponse> updateCategory(@PathVariable("id") String id,
+    public ResponseEntity<CategoryUpdateResponse> updateCategory(@PathVariable("id") String id,
                                                                  @Valid @RequestBody CategoryUpdateRequest categoryUpdateRequest) {
-        return new BaseResponse<>(HttpStatus.OK, null, categoryService.updateCategory(id, categoryUpdateRequest));
+        return new ResponseEntity<>(categoryService.updateCategory(id, categoryUpdateRequest), HttpStatus.OK);
     }
 
     @PatchMapping("/deactivate/{id}")
-    public BaseResponse<HttpStatus> deactivateCategory(@PathVariable("id") String id) {
+    public ResponseEntity<HttpStatus> deactivateCategory(@PathVariable("id") String id) {
         categoryService.deactivateCategory(id);
-        return new BaseResponse<>(HttpStatus.NO_CONTENT, null, null);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
     @PatchMapping("/activate/{id}")
-    public BaseResponse<HttpStatus> activateCategory(@PathVariable("id") String id) {
+    public ResponseEntity<HttpStatus> activateCategory(@PathVariable("id") String id) {
         categoryService.activateCategory(id);
-        return new BaseResponse<>(HttpStatus.NO_CONTENT, null, null);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
     @DeleteMapping("/{id}")
-    public BaseResponse<HttpStatus> deleteCategory(@PathVariable("id") String id) {
+    public ResponseEntity<HttpStatus> deleteCategory(@PathVariable("id") String id) {
         categoryService.deleteCategory(id);
-        return new BaseResponse<>(HttpStatus.NO_CONTENT, null, null);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
     @GetMapping("/all/deactivated")

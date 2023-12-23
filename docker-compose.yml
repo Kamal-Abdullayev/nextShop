@@ -1,0 +1,16 @@
+version: '3'
+
+services:
+  rabbitmq:
+    image: rabbitmq:management
+    container_name: nextShop-rabbit
+    environment:
+      - RABBITMQ_DEFAULT_USER=nextShop
+      - RABBITMQ_DEFAULT_PASS=nextShop
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+
+networks:
+  default:
+    driver: bridge

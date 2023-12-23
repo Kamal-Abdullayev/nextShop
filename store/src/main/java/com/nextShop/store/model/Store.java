@@ -2,13 +2,10 @@ package com.nextShop.store.model;
 
 import com.nextShop.store.model.base.BaseEntityAudit;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotEmpty;
 import lombok.*;
 
 import java.util.Date;
 import java.util.List;
-import java.util.UUID;
 
 
 @EqualsAndHashCode(callSuper = true)
