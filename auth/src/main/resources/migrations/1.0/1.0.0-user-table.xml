@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <changeSet id="create-user-table" author="Kamal">
+        <createTable tableName="users">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="nvarchar(80)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="surname" type="nvarchar(80)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="username" type="nvarchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="email" type="nvarchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="phoneNumber" type="varchar(20)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="password" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="createdAt" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updatedAt" type="datetime">
+                <constraints nullable="true"/>
+            </column>
+            <column name="accountNonExpired" type="boolean">
+                <constraints nullable="false"/>
+            </column>
+            <column name="isEnabled" type="boolean">
+                <constraints nullable="false"/>
+            </column>
+            <column name="accountNonLocked" type="boolean">
+                <constraints nullable="false"/>
+            </column>
+            <column name="credentialNonExpired" type="boolean">
+                <constraints nullable="false"/>
+            </column>
+            <column name="isCredentialsNonExpired" type="boolean">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+</databaseChangeLog>
