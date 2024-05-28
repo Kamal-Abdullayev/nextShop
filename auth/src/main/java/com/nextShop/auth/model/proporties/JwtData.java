@@ -3,7 +3,7 @@ package com.nextShop.auth.model.proporties;
 import lombok.Data;
 
 @Data
-public class SecurityJwtData {
+public class JwtData {
 
     private String publicKey;
     private String privateKey;
@@ -11,7 +11,7 @@ public class SecurityJwtData {
     private int refreshTokenValidityTime;
 
     public Long getRefreshTokenValidityTime(boolean rememberMe) {
-        return refreshTokenValidityTime * (rememberMe ? 30L:1L);
+        return refreshTokenValidityTime * (rememberMe ? 30L : 1L);
     }
 
 }

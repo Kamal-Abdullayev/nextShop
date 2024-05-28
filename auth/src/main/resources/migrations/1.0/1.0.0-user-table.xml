@@ -7,46 +7,49 @@
 
     <changeSet id="create-user-table" author="Kamal">
         <createTable tableName="users">
-            <column name="id" type="bigint" autoIncrement="true">
+            <column name="id" type="BIGINT" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="name" type="nvarchar(80)">
+            <column name="first_name" type="char(80)">
                 <constraints nullable="false"/>
             </column>
-            <column name="surname" type="nvarchar(80)">
+            <column name="last_name" type="char(80)">
                 <constraints nullable="false"/>
             </column>
-            <column name="username" type="nvarchar(255)">
+            <column name="username" type="char(255)">
                 <constraints nullable="false"/>
             </column>
-            <column name="email" type="nvarchar(255)">
+            <column name="role_id" type="BIGINT">
                 <constraints nullable="false"/>
             </column>
-            <column name="phoneNumber" type="varchar(20)">
+            <column name="email" type="char(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="phone_number" type="varchar(20)">
                 <constraints nullable="true"/>
             </column>
             <column name="password" type="varchar(255)">
                 <constraints nullable="false"/>
             </column>
-            <column name="createdAt" type="datetime">
+            <column name="created_at" type="datetime">
                 <constraints nullable="false"/>
             </column>
-            <column name="updatedAt" type="datetime">
+            <column name="updated_at" type="datetime">
                 <constraints nullable="true"/>
             </column>
-            <column name="accountNonExpired" type="boolean">
+            <column name="account_non_expired" type="boolean">
                 <constraints nullable="false"/>
             </column>
-            <column name="isEnabled" type="boolean">
+            <column name="is_enabled" type="boolean">
                 <constraints nullable="false"/>
             </column>
-            <column name="accountNonLocked" type="boolean">
+            <column name="account_non_locked" type="boolean">
                 <constraints nullable="false"/>
             </column>
-            <column name="credentialNonExpired" type="boolean">
+            <column name="credential_non_expired" type="boolean">
                 <constraints nullable="false"/>
             </column>
-            <column name="isCredentialsNonExpired" type="boolean">
+            <column name="is_credentials_non_expired" type="boolean">
                 <constraints nullable="false"/>
             </column>
         </createTable>

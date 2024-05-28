@@ -1,8 +1,8 @@
 package com.nextShop.auth.service.security;
 
+import com.nextShop.auth.dto.RefreshTokenDto;
 import com.nextShop.auth.model.User;
 import com.nextShop.auth.model.proporties.SecurityProperties;
-import com.nextShop.auth.repository.UserRepository;
 import com.nextShop.auth.util.PublicPrivateKeyUtils;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -16,15 +16,20 @@ import java.util.Date;
 @Component
 @Slf4j
 @RequiredArgsConstructor
-public class AccessTokenManager implements TokenGenerator<User>, TokenReader<Claims> {
-
+public class RefreshTokenManager implements TokenGenerator<RefreshTokenDto>, TokenReader<Claims>{
     private final SecurityProperties securityProperties;
+
     @Override
-    public String generate(User user) {
+    public String generate(RefreshTokenDto obj) {
+        final User user = obj.getUser();
+
         Claims claims = Jwts.claims();
         claims.put("userName", user.getUsername());
+        claims.put("type", "REFRESH_TOKEN");
+
         Date currentTime = new Date();
-        Date expireTime = new Date(currentTime.getTime() + securityProperties.getJwt().getAccessTokenValidityTime());
+        Date expireTime = new Date(currentTime.getTime()
+                + securityProperties.getJwt().getRefreshTokenValidityTime(obj.isRememberMe()));
 
 
         return Jwts.builder()
@@ -35,7 +40,6 @@ public class AccessTokenManager implements TokenGenerator<User>, TokenReader<Cla
                 .signWith(PublicPrivateKeyUtils.getPrivateKey(), SignatureAlgorithm.RS256)
                 .compact();
     }
-
 
     @Override
     public Claims read(String token) {
