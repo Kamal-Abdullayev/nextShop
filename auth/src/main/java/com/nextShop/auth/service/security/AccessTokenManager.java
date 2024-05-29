@@ -22,7 +22,7 @@ public class AccessTokenManager implements TokenGenerator<User>, TokenReader<Cla
     @Override
     public String generate(User user) {
         Claims claims = Jwts.claims();
-        claims.put("userName", user.getUsername());
+        claims.put("username", user.getUsername());
         Date currentTime = new Date();
         Date expireTime = new Date(currentTime.getTime() + securityProperties.getJwt().getAccessTokenValidityTime());
 

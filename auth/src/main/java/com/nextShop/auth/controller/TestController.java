@@ -12,6 +12,7 @@ public class TestController {
     @GetMapping("/test")
     public BaseResponse<String> test() {
         UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        System.out.println(userDetails.getUsername());
         return BaseResponse.success(userDetails.getUsername());
     }
 

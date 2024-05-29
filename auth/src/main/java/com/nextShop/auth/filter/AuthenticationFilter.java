@@ -32,7 +32,7 @@ public class AuthenticationFilter extends OncePerRequestFilter {
             final String accessToken = token.substring(7);
             Claims claims = accessTokenManager.read(accessToken);
             String username = claims.get("username", String.class);
-
+            System.out.println("filter: " + username);
             UserDetails userDetails = userDetailsService.loadUserByUsername(username);
 
             SecurityContextHolder.getContext().setAuthentication(

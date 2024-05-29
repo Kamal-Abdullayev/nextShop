@@ -27,26 +27,26 @@ public class AuthApplication implements CommandLineRunner{
 	public void run(String... args) throws Exception {
 
 
-		User user = User.builder()
-				.id(2L)
-				.firstName("Kamal")
-				.lastName("Abdullayev")
-				.username("Kamal2.Abdullayev")
-				.email("kamal2@gmail.com")
-				.phoneNumber("+994505554475")
-				.password(passwordEncoder.encode("test"))
-				.accountNonExpired(true)
-				.isEnabled(true)
-				.isEnabled(true)
-				.credentialNonExpired(true)
-				.isCredentialsNonExpired(true)
-				.roleId(1L)
-				.build();
-
-		userService.saveUser(user);
-
-		User myUser = userService.getUserByEmail("kamal@gmail.com");
-		System.out.println(myUser);
+//		User user = User.builder()
+//				.id(2L)
+//				.firstName("Kamal")
+//				.lastName("Abdullayev")
+//				.username("Kamal.Abdullayev")
+//				.email("kamal@gmail.com")
+//				.phoneNumber("+994505554466")
+//				.password(passwordEncoder.encode("test"))
+//				.accountNonExpired(true)
+//				.isEnabled(true)
+//				.isEnabled(true)
+//				.credentialNonExpired(true)
+//				.isCredentialsNonExpired(true)
+//				.roleId(1L)
+//				.build();
+//
+//		userService.saveUser(user);
+//
+//		User myUser = userService.getUserByEmail("kamal@gmail.com");
+//		System.out.println(myUser);
 
 
 //		final String token = accessTokenManager.generate(user);

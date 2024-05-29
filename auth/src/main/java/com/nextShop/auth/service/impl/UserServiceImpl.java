@@ -23,6 +23,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User getUserByUsername(String username) {
+        System.out.println(username);
         return userRepository.findUserByUsername(username).orElseThrow(
                 //todo: change exception
                 () -> new RuntimeException("User with username " + username + " not found")

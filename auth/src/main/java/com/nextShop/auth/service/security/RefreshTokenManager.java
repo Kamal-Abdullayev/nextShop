@@ -24,7 +24,7 @@ public class RefreshTokenManager implements TokenGenerator<RefreshTokenDto>, Tok
         final User user = obj.getUser();
 
         Claims claims = Jwts.claims();
-        claims.put("userName", user.getUsername());
+        claims.put("username", user.getUsername());
         claims.put("type", "REFRESH_TOKEN");
 
         Date currentTime = new Date();
@@ -43,10 +43,14 @@ public class RefreshTokenManager implements TokenGenerator<RefreshTokenDto>, Tok
 
     @Override
     public Claims read(String token) {
-        return Jwts.parserBuilder()
+        Claims tokenData = Jwts.parserBuilder()
                 .setSigningKey(PublicPrivateKeyUtils.getPublicKey())
                 .build()
                 .parseClaimsJws(token)
                 .getBody();
+
+        String tokenType = tokenData.get("type", String.class);
+        if (!"REFRESH_TOKEN".equals(tokenType)) throw new RuntimeException("Invalid token type");
+        return tokenData;
     }
 }
