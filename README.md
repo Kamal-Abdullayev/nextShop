@@ -1,3 +1,12 @@
-# E-Commerce Project (Work in Progress)
+## 🚧 Work in Progress (E-Commerce Project) 🚧
 
-This project is an ongoing effort to build an e-commerce platform, where I'm applying the latest technologies and best practices as I learn them. While this may not represent an ideal software architecture, it's a demo project that helps me explore and implement new concepts, particularly focused on microservices.
+This project is currently under active development. Features, code, and functionality may change frequently, and certain parts of the project may not yet be fully implemented or stable.
+
+### What to Expect
+- 🔧 Regular updates and improvements
+- 🐛 Potential bugs or incomplete features
+- 💡 Opportunities to contribute or provide feedback
+
+---
+
+Thank you for your interest and patience as I continue building this project! 🚀
