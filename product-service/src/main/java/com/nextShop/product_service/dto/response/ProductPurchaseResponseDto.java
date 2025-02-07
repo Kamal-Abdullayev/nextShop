@@ -5,17 +5,14 @@ import com.nextShop.product_service.model.enums.ProductColorEnum;
 import com.nextShop.product_service.model.enums.ProductSizeEnum;
 import lombok.*;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class ProductResponseDto {
+public class ProductPurchaseResponseDto {
     private String name;
     private double price;
     private double discountPrice;
@@ -24,11 +21,9 @@ public class ProductResponseDto {
 
     private List<ProductColorEnum> productColorEnumList;
     private List<ProductSizeEnum> productSizeEnumList;
-    private Set<CategoryResponseDto> categories;
-    private List<ImageUploadResponseDto> images;
 
-    public static ProductResponseDto convert(Product product) {
-        return ProductResponseDto.builder()
+    public static ProductPurchaseResponseDto convert(Product product) {
+        return ProductPurchaseResponseDto.builder()
                 .name(product.getName())
                 .price(product.getPrice())
                 .discountPrice(product.getDiscountPrice())
@@ -36,16 +31,6 @@ public class ProductResponseDto {
                 .quantity(product.getQuantity())
                 .productColorEnumList(product.getColors())
                 .productSizeEnumList(product.getSizes())
-                .categories(
-                        product.getCategories().stream()
-                                .map(CategoryResponseDto::convert)
-                                .collect(Collectors.toSet())
-                )
-                .images(product.getImages() == null ? new ArrayList<>() :
-                        product.getImages().stream()
-                        .map(ImageUploadResponseDto::convert)
-                        .collect(Collectors.toList())
-                )
                 .build();
     }
 }

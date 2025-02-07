@@ -6,14 +6,13 @@ import jakarta.validation.constraints.*;
 import lombok.*;
 
 import java.util.List;
-import java.util.Set;
 
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class ProductCreateRequestDto {
+public class ProductUpdateRequestDto {
     @NotBlank(message = "Product name cannot be blank")
     @Size(min = 3, message = "Product name cannot be shorter than 3 characters")
     private String name;
@@ -34,6 +33,4 @@ public class ProductCreateRequestDto {
 
     private List<ProductColorEnum> colors;
     private List<ProductSizeEnum> sizes;
-    private Set<String> categories;
-//    private List<ProductImageUploadRequestDto> images;
 }

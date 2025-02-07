@@ -11,11 +11,15 @@ import lombok.*;
 public class ImageUploadResponseDto {
     private String imagePath;
     private boolean isMainImage;
+    private String productId;
 
     public static ImageUploadResponseDto convert(Image image) {
         return ImageUploadResponseDto.builder()
                 .imagePath(image.getImagePath())
                 .isMainImage(image.isMainImage())
+                .productId(
+                        image.getProduct() == null ? null : image.getProduct().getId()
+                )
                 .build();
     }
 
