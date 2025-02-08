@@ -9,4 +9,6 @@ This project is currently under active development. Features, code, and function
 
 ---
 
-Thank you for your interest and patience as I continue building this project! 🚀
+### The initial architecture of the project:
+
+![Architecture Diagram](nextShop_architecture_v1.0.jpg)
