@@ -1,4 +1,4 @@
-package com.nextShop.product_service.dto.request;
+package com.nextShop.product_service.dto.request.product;
 
 import com.nextShop.product_service.model.enums.ProductColorEnum;
 import com.nextShop.product_service.model.enums.ProductSizeEnum;

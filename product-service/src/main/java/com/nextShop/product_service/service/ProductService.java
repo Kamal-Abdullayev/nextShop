@@ -1,9 +1,9 @@
 package com.nextShop.product_service.service;
 
 
-import com.nextShop.product_service.dto.request.ProductCreateRequestDto;
-import com.nextShop.product_service.dto.request.ProductPurchaseRequestDto;
-import com.nextShop.product_service.dto.request.ProductUpdateRequestDto;
+import com.nextShop.product_service.dto.request.product.ProductCreateRequestDto;
+import com.nextShop.product_service.dto.request.product.ProductPurchaseRequestDto;
+import com.nextShop.product_service.dto.request.product.ProductUpdateRequestDto;
 import com.nextShop.product_service.dto.response.ProductPurchaseResponseDto;
 import com.nextShop.product_service.dto.response.ProductResponseDto;
 import com.nextShop.product_service.exception.InvalidParameterException;
