@@ -12,3 +12,17 @@ spring:
 server:
   port: 8098
 
+management:
+  endpoints:
+    web:
+      exposure:
+        include: metrics, health
+  datadog:
+    metrics:
+      export:
+        api-key: ${DATADOG_SECRET_KEY}
+        uri: https://us5.datadoghq.com  # Change uri based on your Datadog region
+        step: 10s
+  metrics:
+    tags:
+      application: ${spring.application.name}

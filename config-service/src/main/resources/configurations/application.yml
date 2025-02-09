@@ -9,3 +9,22 @@ spring:
   cloud:
     override-system-properties: false
 
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: metrics, health
+  datadog:
+    metrics:
+      export:
+        api-key: ${DATADOG_SECRET_KEY}
+        uri: https://us5.datadoghq.com
+        step: 10s
+  metrics:
+    tags:
+      application: ${spring.application.name}
+
+logging:
+  level:
+    root: info
