@@ -12,3 +12,14 @@ This project is currently under active development. Features, code, and function
 ### The initial architecture of the project:
 
 ![Architecture Diagram](nextShop_architecture_v1.0.jpg)
+
+## 🚀 Tech Stack
+- **Java 23**
+- **Spring Boot 3**
+- **MySQL**
+- **MongoDB**
+- **Maven**
+- **Kafka**
+- **ZooKeeper**
+- **MailDev**
+- **Docker**
