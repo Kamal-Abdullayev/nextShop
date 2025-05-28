@@ -51,8 +51,8 @@ public class SecurityConfig {
 //                    request.requestMatchers("/v3/api-docs/**", "/swagger-ui/**").permitAll();
 
                     // Auth URLs
-                    request.requestMatchers("/v1/auth/logout").authenticated();
-                    request.requestMatchers("/v1/auth/**").anonymous();
+                    request.requestMatchers("/api/v1/auth/logout").authenticated();
+                    request.requestMatchers("/api/v1/auth/**").anonymous();
 
                     // Test endpoints
 //                    request.requestMatchers("/test").authenticated();
