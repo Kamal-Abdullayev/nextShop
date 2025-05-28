@@ -1,10 +1,23 @@
 package com.nextShop.user_service.model;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import lombok.*;
+import lombok.experimental.SuperBuilder;
 
-public enum Role  {
+@Data
+@SuperBuilder
+@NoArgsConstructor
+@AllArgsConstructor
+@Entity
+public class Role {
+    @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private String id;
 
-    ROLE_USER,
-    ROLE_ADMIN,
-    ROLE_SUPER_ADMIN;
+    private String name;
+    private String description;
 
 }

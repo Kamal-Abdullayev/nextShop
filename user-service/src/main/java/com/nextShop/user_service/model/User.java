@@ -2,13 +2,13 @@ package com.nextShop.user_service.model;
 
 import jakarta.persistence.*;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 
-@Getter
-@Setter
+@Data
+@SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
 @Entity
 @Table(name = "users")
 public class User {
@@ -25,5 +25,8 @@ public class User {
     @Column(name = "phone_number")
     private String phoneNumber;
     private String password;
+    String roleId;
+    UserStatus status;
+
 
 }

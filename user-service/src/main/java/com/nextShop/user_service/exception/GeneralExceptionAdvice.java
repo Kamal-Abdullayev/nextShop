@@ -25,4 +25,9 @@ public class GeneralExceptionAdvice {
         ), HttpStatus.BAD_REQUEST);
     }
 
+    @ExceptionHandler(BaseException.class)
+    public ResponseEntity<BaseResponse<?>> handleBaseException(BaseException ex) {
+        return ResponseEntity.status(ex.getResponseMessage().status()).body(BaseResponse.error(ex));
+    }
+
 }

@@ -25,7 +25,6 @@ public class UserCreatRequestDto {
     @NotBlank
     @Size(min = 8, message = "Password cannot be shorter than 8 characters")
     private String password;
-
     // TODO: Better password validation
     // TODO: Add other fields
 

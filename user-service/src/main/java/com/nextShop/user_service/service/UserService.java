@@ -3,6 +3,7 @@ package com.nextShop.user_service.service;
 import com.nextShop.user_service.dto.UserCreatRequestDto;
 import com.nextShop.user_service.dto.UserResponseDto;
 import com.nextShop.user_service.dto.UserUpdateRequestDto;
+import com.nextShop.user_service.exception.BaseException;
 import com.nextShop.user_service.exception.InvalidParameterException;
 import com.nextShop.user_service.exception.ResourceNotFoundException;
 import com.nextShop.user_service.model.User;
@@ -10,6 +11,8 @@ import com.nextShop.user_service.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,6 +22,7 @@ import java.util.List;
 @Service
 public class UserService {
     private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
 
     public List<UserResponseDto> getAllUsers(Pageable pageable) {
         log.info("Get all users");
@@ -49,6 +53,7 @@ public class UserService {
                 .username(userCreatRequestDto.getUsername())
                 .email(userCreatRequestDto.getEmail())
                 .phoneNumber(userCreatRequestDto.getPhoneNumber())
+                .password(passwordEncoder.encode(userCreatRequestDto.getPassword()))
                 .build();
 
         log.info("Create user: {}", newUser);
@@ -91,5 +96,17 @@ public class UserService {
         userRepository.delete(user);
         log.info("User deleted successfully with id: {}", userId);
     }
+
+    public User getByEmail(String email) {
+        return userRepository.findUserByEmail(email).orElseThrow(
+                () -> BaseException.notFound(User.class.getSimpleName(), "email", email)
+        );
+    }
+
+    public boolean checkByEmail(String email) {
+        return userRepository.findUserByEmail(email).isPresent();
+    }
+
+
 
 }

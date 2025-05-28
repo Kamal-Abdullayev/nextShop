@@ -194,6 +194,13 @@ services:
     environment:
       CDK_CONSOLE-URL: "http://conduktor-console:8080"
 
+  redis:
+    image: redis:7-alpine
+    container_name: redis
+    restart: always
+    ports:
+      - "6379:6379"
+    command: ["redis-server", "--requirepass", "secret"]
 
 
 volumes:
