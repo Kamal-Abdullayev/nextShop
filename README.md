@@ -11,7 +11,7 @@ This project is currently under active development. Features, code, and function
 
 ### The initial architecture of the project:
 
-![Architecture Diagram](nextShop_architecture_v1.0.jpg)
+![Architecture Diagram](nextShop_architecture_v1.1.png)
 
 ## 🚀 Tech Stack
 - **Java 23**
